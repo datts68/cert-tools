@@ -27,7 +27,7 @@ see example of certificate template and batch creation in sample_data
 
 The cert-tools setup script installs 3 scripts, which are described below:
 
-### 1. create_v2_issuer.py
+#### 1. create_v2_issuer.py
 
 Generate a JSON issuer identity file with `"python create_v2_issuer.py -c conf-ini -o issuer.json"`. The conf.ini is the same that you are using to generate the certificate template, and to instantiate the certificates. You will find this python module in cert-tools.
 
@@ -50,7 +50,7 @@ The problem I had, also had to do with the date the date the address was created
 
 Finally, change the issuer_public_key to the one you were using in the cert-issuer. But don't miss the `"ecdsa-koblitz-pubkey:"`.
 
-### 2. create_certificate_template.py
+#### 2. create_certificate_template.py
 
 ##### Run
 
@@ -145,14 +145,13 @@ Argument details:
 Creates a certificate template populated with the setting you provide in the conf.ini file. This will not contain recipient-specific data; such fields will be populated with merge tags.
  
 
-### 3. instantiate_certificate_batch.py
+#### 3. instantiate_certificate_batch.py
 
 ##### Run
 
 ```
 instantiate-certificate-batch -c conf.ini
 ```
-
 
 ##### About
 
@@ -209,7 +208,8 @@ Argument details:
 
 ```
 
-### Adding custom fields
+----
+#### Adding custom fields
 
 You can specify additional global fields (fields that apply for every certificate in the batch) and additional per-recipient fields (fields that you will specify per-recipient).
 
@@ -284,9 +284,8 @@ above expanded for readability:
 ```
 TODO
 ```
-  
-   
-### create_revocation_addresses.py (currently unused)
+
+#### create_revocation_addresses.py (currently unused)
 
 ##### Run (optional)
 ```
@@ -310,7 +309,7 @@ To merge to roster (in unix) run:
 ```
 paste -d , roster.txt rev_addresses.txt > roster_with_rev.txt
 ```
-
+----
 ### Example
 
 See sample_data for example configuration and output. `conf-mainnet.ini` was used to create a batch of 2 unsigned certificates on the Bitcoin blockchain. 
@@ -326,6 +325,7 @@ The steps were:
     
 Then the unsigned certificates were copied to cert-issuer for signing and issuing on the blockchain.
 
-### Contact
+----
+#### Contact
 
 Contact us at [the Blockcerts community forum](http://community.blockcerts.org/).
