@@ -6,7 +6,7 @@ Command line tools for designing certificate templates, instantiating a certific
 see example of certificate template and batch creation in sample_data 
 
 ----
-## Install
+### Install
 
 1. Ensure you have an python environment. [Recommendations](https://github.com/blockchain-certificates/cert-issuer/blob/master/docs/virtualenv.md)
 
@@ -23,7 +23,7 @@ see example of certificate template and batch creation in sample_data
   ```
   
 ----
-## Scripts
+### Scripts
 
 The cert-tools setup script installs 3 scripts, which are described below:
 
@@ -37,7 +37,7 @@ The previous step will generate a JSON file identifying the issuer, that has to 
 issuer_id = http://[your_server]/issuer.json
 ````
 
-The problem I had, also had to do with the date the date the address was created. In the "issuer.json" file created in the previous step, I went to the end and modified the creation data, long before the date I generated the certificates. Like that:
+The problem I had, also had to do with the date the date the address was created. In the `"issuer.json"` file created in the previous step, I went to the end and modified the creation data, long before the date I generated the certificates. Like that:
 
 ````
 "publicKey": [
@@ -311,7 +311,7 @@ To merge to roster (in unix) run:
 paste -d , roster.txt rev_addresses.txt > roster_with_rev.txt
 ```
 
-## Example
+### Example
 
 See sample_data for example configuration and output. `conf-mainnet.ini` was used to create a batch of 2 unsigned certificates on the Bitcoin blockchain. 
 
@@ -326,6 +326,6 @@ The steps were:
     
 Then the unsigned certificates were copied to cert-issuer for signing and issuing on the blockchain.
 
-## Contact
+### Contact
 
 Contact us at [the Blockcerts community forum](http://community.blockcerts.org/).
