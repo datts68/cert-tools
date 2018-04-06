@@ -5,6 +5,7 @@ Command line tools for designing certificate templates, instantiating a certific
 
 see example of certificate template and batch creation in sample_data 
 
+----
 ## Install
 
 1. Ensure you have an python environment. [Recommendations](https://github.com/blockchain-certificates/cert-issuer/blob/master/docs/virtualenv.md)
@@ -20,21 +21,40 @@ see example of certificate template and batch creation in sample_data
   ```bash
   pip install .
   ```
-
+  
+----
 ## Scripts
 
-The cert-tools setup script installs 2 scripts, which are described below:
+The cert-tools setup script installs 3 scripts, which are described below:
 
+### 1. create_v2_issuer.py
 
-### create_certificate_template.py
+Generate a JSON issuer identity file with "python create_v2_issuer.py -c conf-ini -o issuer.json". The conf.ini is the same that you are using to generate the certificate template, and to instantiate the certificates. You will find this python module in cert-tools.
 
-#### Run
+The previous step will generate a JSON file identifying the issuer, that has to be saved in the exact location that you are declaring in the conf.ini file used also in the previous step:
+
+    issuer_id = http://[your_server]/issuer.json
+
+The problem I had, also had to do with the date the date the address was created. In the "issuer.json" file created in the previous step, I went to the end and modified the creation data, long before the date I generated the certificates. Like that:
+
+    "publicKey": [
+       {
+          "id": "ecdsa-koblitz-pubkey:mgEtDtGbwxBE3DHfoaT9QeT3VB931PB86t",
+          "created": "2018-03-31T10:59:31.098936+00:00"
+       }
+    ]
+
+Finally, change the issuer_public_key to the one you were using in the cert-issuer. But don't miss the "ecdsa-koblitz-pubkey:".
+
+### 2. create_certificate_template.py
+
+##### Run
 
 ```bash
 create-certificate-template -c conf.ini
 ```
 
-#### Configuration
+##### Configuration
 
 The `conf.ini` fields are described below. Optional arguments are in brackets
 
@@ -116,21 +136,21 @@ Argument details:
 
 ```
 
-#### About
+##### About
 
 Creates a certificate template populated with the setting you provide in the conf.ini file. This will not contain recipient-specific data; such fields will be populated with merge tags.
  
 
-### instantiate_certificate_batch.py
+### 3. instantiate_certificate_batch.py
 
-#### Run
+##### Run
 
 ```
 instantiate-certificate-batch -c conf.ini
 ```
 
 
-#### About
+##### About
 
 Populates the certificate template (created by the previous script) with recipient data from a csv file. It generates a certificate per recipient based on the values in the csv file.
 
@@ -143,7 +163,7 @@ The csv file must always contain:
 - pubkey
 - identity
 
-#### Configuration
+##### Configuration
 
 The `conf.ini` fields are described below. Optional arguments are in brackets
 
@@ -189,7 +209,7 @@ Argument details:
 
 You can specify additional global fields (fields that apply for every certificate in the batch) and additional per-recipient fields (fields that you will specify per-recipient).
 
-#### Important: defining your custom fields in a JSON-LD context
+##### Important: defining your custom fields in a JSON-LD context
 When adding either global or per-recipient custom fields, you must define each of your new terms in a [JSON-LD context](https://json-ld.org/spec/latest/json-ld/). You can either point to an existing JSON-LD context, or embed them directly in the context of the certificate. For an example of the latter, see the [JSON-LD specification section 3.1](https://json-ld.org/spec/latest/json-ld/#the-context). In this case, the `@context` value would be an array listing the existing context links, and your new definition.
 
 Examples of both options are below:
@@ -207,7 +227,7 @@ Examples of both options are below:
 }
 ```
 
-#### Custom global fields
+##### Custom global fields
 
 You can specify custom global fields in the conf.ini file with the `additional_global_fields` entry
 
@@ -237,7 +257,7 @@ or, expanded for readability:
 
 ```
 
-#### Custom per-recipient fields
+##### Custom per-recipient fields
 
 See above note on (current) manual step of defining custom JSON-LD context.
 
@@ -264,12 +284,12 @@ TODO
    
 ### create_revocation_addresses.py (currently unused)
 
-#### Run (optional)
+##### Run (optional)
 ```
 create-revocation-addresses -k tpubD6NzV...H66KUZEBkf
 ```
 
-#### About
+##### About
 
 Generates Bitcoin addresses using an HD extended public (or private) key to be used as the issuer's revocation addresses for the certificates. This would be useful only if the issuer requires to be able to revoke specific certificates later on. It creates a list of addresses that could then be easily merged with the roster file, e.g. using unix's paste command.
 
