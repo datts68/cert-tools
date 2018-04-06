@@ -29,22 +29,26 @@ The cert-tools setup script installs 3 scripts, which are described below:
 
 ### 1. create_v2_issuer.py
 
-Generate a JSON issuer identity file with "python create_v2_issuer.py -c conf-ini -o issuer.json". The conf.ini is the same that you are using to generate the certificate template, and to instantiate the certificates. You will find this python module in cert-tools.
+Generate a JSON issuer identity file with `"python create_v2_issuer.py -c conf-ini -o issuer.json"`. The conf.ini is the same that you are using to generate the certificate template, and to instantiate the certificates. You will find this python module in cert-tools.
 
 The previous step will generate a JSON file identifying the issuer, that has to be saved in the exact location that you are declaring in the conf.ini file used also in the previous step:
 
-    issuer_id = http://[your_server]/issuer.json
+```
+issuer_id = http://[your_server]/issuer.json
+````
 
 The problem I had, also had to do with the date the date the address was created. In the "issuer.json" file created in the previous step, I went to the end and modified the creation data, long before the date I generated the certificates. Like that:
 
-    "publicKey": [
-       {
-          "id": "ecdsa-koblitz-pubkey:mgEtDtGbwxBE3DHfoaT9QeT3VB931PB86t",
-          "created": "2018-03-31T10:59:31.098936+00:00"
-       }
-    ]
+````
+"publicKey": [
+   {
+      "id": "ecdsa-koblitz-pubkey:mgEtDtGbwxBE3DHfoaT9QeT3VB931PB86t",
+      "created": "2018-03-31T10:59:31.098936+00:00"
+   }
+]
+````
 
-Finally, change the issuer_public_key to the one you were using in the cert-issuer. But don't miss the "ecdsa-koblitz-pubkey:".
+Finally, change the issuer_public_key to the one you were using in the cert-issuer. But don't miss the `"ecdsa-koblitz-pubkey:"`.
 
 ### 2. create_certificate_template.py
 
