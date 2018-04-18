@@ -27,7 +27,7 @@ The cert-tools setup script installs 3 scripts, which are described below:
 
 ### 1. create_v2_issuer.py
 
-Generate a JSON issuer identity file with `"python create_v2_issuer.py -c conf-ini -o issuer.json"`. The conf.ini is the same that you are using to generate the certificate template, and to instantiate the certificates.
+Generate a JSON issuer identity file with `"python create_v2_issuer.py -c conf.ini -o issuer.json"`. The conf.ini is the same that you are using to generate the certificate template, and to instantiate the certificates.
 
 The previous step will generate a JSON file identifying the issuer, that has to be saved in the exact location that you are declaring in the conf.ini file:
 
